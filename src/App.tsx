@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 interface IAPIOptions {
@@ -21,27 +21,27 @@ function App() {
     },
   };
 
-  async function getFilms() {
-    try {
-      const response = await fetch(
-        "https://api.themoviedb.org/3/movie/popular?language=fr-FR&page=1&key=f87eb78b511a28b0ddbe1baf331bd136",
-        options
-      );
+  useEffect(() => {
+    async function getFilms() {
+      try {
+        const response = await fetch(
+          "https://api.themoviedb.org/3/movie/popular?language=fr-FR&page=1&key=f87eb78b511a28b0ddbe1baf331bd136",
+          options
+        );
 
-      if (!response.ok) {
-        throw new Error(`Error! status: ${response.status}`);
+        if (!response.ok) {
+          throw new Error(`Error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        setFilms(() => [...[], result.results]);
+      } catch (error) {
+        console.error("Error:", error);
       }
-
-      const result = await response.json();
-      setFilms((e) => [...e, result.results]);
-    } catch (error) {
-      console.error("Error:", error);
     }
-  }
 
-  getFilms();
-
-  // console.log(films);
+    getFilms();
+  }, []);
 
   return (
     <>
