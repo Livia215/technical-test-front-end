@@ -3,5 +3,10 @@
 .filmTileContainer {
   .filmTilePoster {
     width: 100px;
+    filter: blur(3px);
+    transition: filter 0.2s ease;
+    &.notBlurred {
+      filter: blur(0);
+    }
   }
 }

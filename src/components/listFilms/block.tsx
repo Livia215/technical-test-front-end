@@ -4,7 +4,10 @@ import FilmTile from "../filmTile/block";
 
 import style from "./block.module.scss";
 
-const ListFilms: FC<{ films: FilmContent[] }> = ({ films }) => {
+const ListFilms: FC<{
+  films: FilmContent[] | undefined;
+  filmsDiscovered: number[] | undefined;
+}> = ({ films, filmsDiscovered }) => {
   return (
     <div className={style.listFilmsContainer}>
       {films &&
@@ -12,7 +15,12 @@ const ListFilms: FC<{ films: FilmContent[] }> = ({ films }) => {
         films.map((film) => {
           return (
             <div key={film.id}>
-              <FilmTile content={film} />
+              <FilmTile
+                content={film}
+                show={
+                  filmsDiscovered ? filmsDiscovered.includes(film.id) : false
+                }
+              />
             </div>
           );
         })}

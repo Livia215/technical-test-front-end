@@ -1,22 +1,26 @@
 @import "../../common";
 
 .searchBarContainer {
-  position: relative;
+  @extend .content-width;
   padding-bottom: 20px;
-  .input {
-    border: none;
-    background-color: lightgray;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    width: 100%;
-  }
+  .formContainer {
+    position: relative;
+    padding-bottom: 10px;
+    .input {
+      border: none;
+      background-color: lightgray;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      width: -webkit-fill-available;
+    }
 
-  .icon {
-    position: absolute;
-    top: 20px;
-    right: 0px;
+    .icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
   }
 }

@@ -6,6 +6,7 @@ import { FilmContent, FilmAPI } from "./types/films";
 
 function App() {
   const [films, setFilms] = useState<FilmContent[]>();
+  const [filmsDiscovered, setFilmsDiscovered] = useState<number[]>();
 
   useEffect(() => {
     async function getFilms() {
@@ -39,15 +40,15 @@ function App() {
     getFilms();
   }, []);
 
-  console.log(films);
-
   return (
     <div className="appContainer">
-      <h1>Trouve les films et gagne une joie indescriptible</h1>
+      <SearchBar
+        filmsDiscovered={filmsDiscovered}
+        setFilmsDiscovered={setFilmsDiscovered}
+        films={films}
+      />
 
-      <SearchBar />
-
-      <ListFilms films={films} />
+      <ListFilms films={films} filmsDiscovered={filmsDiscovered} />
     </div>
   );
 }
