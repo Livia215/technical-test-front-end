@@ -8,18 +8,18 @@ const FilmTile: FC<{ content: FilmContent; show: boolean }> = ({
   show,
 }) => {
   const hideTitle = (title: string) => {
-    return title.replace(/[a-zA-Z0-9.!?,:;'"_-]/g, "*");
+    return title.replace(/[a-zA-ZÀ-ÖØ-öø-ÿ0-9]/g, "*"); // Don't include special characters to give the player a minimum of help
   };
-
-  console.log(content.title);
 
   return (
     <div className={style.filmTileContainer}>
-      <img
-        src={content.poster}
-        alt="Image du film"
-        className={clsx(style.filmTilePoster, show && style.notBlurred)}
-      />
+      {content.poster_path && (
+        <img
+          src={`https://image.tmdb.org/t/p/original/${content.poster_path}`}
+          alt="Image du film"
+          className={clsx(style.filmTilePoster, show && style.notBlurred)}
+        />
+      )}
       <p>{show ? content.title : hideTitle(content.title)}</p>
     </div>
   );

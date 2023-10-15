@@ -1,0 +1,69 @@
+@import "../../common.scss";
+
+.popupBackground {
+  position: fixed;
+  background-color: rgba(lightgrey, 0.5);
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  .popupFilmContainer {
+    position: fixed;
+    width: 80vw;
+    height: fit-content;
+    background-color: white;
+    border: 2px solid lightgray;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 900px;
+    max-height: 800px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 40px;
+    padding: 20px;
+    border-radius: 10px;
+    @include mobile {
+      max-height: 80vh;
+      grid-template-columns: 1fr;
+      overflow: scroll;
+    }
+    &::before {
+      position: absolute;
+      background-color: red;
+      width: 100vw;
+      height: 100vh;
+      left: 0;
+      top: 0;
+    }
+    .popupFilmImage {
+      width: 100%;
+      margin: auto;
+      height: 100%;
+      object-fit: contain;
+    }
+    .popupContent {
+      display: flex;
+      flex-direction: column;
+      > p {
+        margin: 5px 0;
+      }
+      .title {
+        font-size: 30px;
+        font-weight: bold;
+      }
+      .genres {
+        display: flex;
+        > p:not(:last-of-type) {
+          margin-right: 5px;
+        }
+      }
+    }
+    .closeIcon {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      cursor: pointer;
+    }
+  }
+}
