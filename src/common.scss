@@ -1,0 +1,49 @@
+// COLORS
+$red: "#D50F39";
+$grey: "#D9D9D9";
+
+/* PAGE */
+$desktopBreakpoint: 1200px;
+$tabletBreakpoint: 992px;
+$mobileBreakpoint: 767px;
+
+$contentWidth: 1160px;
+$minMargin: 80px;
+$minMarginLaptop: 50px;
+$minMarginTablet: 40px;
+$minMarginMobile: 20px;
+
+/* MIXINS */
+@mixin mobile {
+  @media screen and (max-width: $mobileBreakpoint) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (max-width: $tabletBreakpoint) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media screen and (max-width: $desktopBreakpoint) {
+    @content;
+  }
+}
+
+// Extends
+.content-width {
+  max-width: $contentWidth;
+  margin: 0 auto;
+  @media (max-width: ($contentWidth + 2 * $minMargin)) {
+    width: auto;
+    margin: 0 $minMargin;
+  }
+  @media (max-width: $tabletBreakpoint) {
+    margin: 0 $minMarginTablet;
+  }
+  @media (max-width: $mobileBreakpoint) {
+    margin: 0 $minMarginMobile;
+  }
+}
