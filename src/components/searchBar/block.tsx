@@ -13,11 +13,20 @@ const SearchBar: FC<{
   const [searchValue, setSearchValue] = useState("");
   const [alert, setAlert] = useState({ message: "", severity: 0 });
 
+  const normalizeAndLowerCase = (text: string) => {
+    return text
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  };
+
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
     if (films) {
       const found = films.find(
-        (value) => value.title.toLowerCase() === searchValue.toLowerCase()
+        (value) =>
+          normalizeAndLowerCase(value.title) ===
+          normalizeAndLowerCase(searchValue)
       );
       if (found) {
         if (filmsDiscovered && !filmsDiscovered.includes(found.id)) {
@@ -52,7 +61,7 @@ const SearchBar: FC<{
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           className={style.input}
-          placeholder="Entrez un nom de film"
+          placeholder="Devinez les films à l'affiche"
         />
         <SearchIcon sx={{ color: style.grey }} className={style.icon} />
       </form>
