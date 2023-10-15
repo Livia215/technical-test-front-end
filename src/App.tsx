@@ -12,7 +12,7 @@ function App() {
     async function getFilms() {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/popular?language=en_EN&page=1&api_key=f87eb78b511a28b0ddbe1baf331bd136`,
+          `https://api.themoviedb.org/3/movie/popular?language=fr&page=1&api_key=f87eb78b511a28b0ddbe1baf331bd136`,
           { method: "GET" }
         );
 
@@ -22,16 +22,7 @@ function App() {
 
         const result = await response.json();
 
-        const returnFilms: FilmContent[] = result.results.map(
-          (film: FilmAPI) => {
-            return {
-              id: film.id,
-              title: film.title,
-              poster: `https://image.tmdb.org/t/p/original/${film.poster_path}`,
-            };
-          }
-        );
-        setFilms(returnFilms);
+        setFilms(result.results);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -42,6 +33,13 @@ function App() {
 
   return (
     <div className="appContainer">
+      <div className="intro">
+        <h1>Trouvez tous les films</h1>
+        <p>
+          Vous avez trouvé {filmsDiscovered ? filmsDiscovered.length : 0} films
+          sur {films ? films.length : 0}
+        </p>
+      </div>
       <SearchBar
         filmsDiscovered={filmsDiscovered}
         setFilmsDiscovered={setFilmsDiscovered}

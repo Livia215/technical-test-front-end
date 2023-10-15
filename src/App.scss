@@ -1,6 +1,23 @@
 @import "./common.scss";
 
+#root {
+  @extend .content-width;
+}
+
 .appContainer {
-  width: 100vw;
   padding: 50px 0;
+
+  .intro {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    @include tablet {
+      flex-direction: column;
+      align-items: flex-start;
+      > p {
+        margin-top: 10px;
+        margin-left: auto;
+      }
+    }
+  }
 }
